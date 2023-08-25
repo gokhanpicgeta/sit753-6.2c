@@ -12,12 +12,27 @@ pipeline{
                 echo "JUnit for unit tests..."
                 echo "JUnit for integration tests..."
             }
+            post{
+                success{
+                    mail to:"vishnuprasad9797@gmail.com",
+                    subject: "Test was sucessful email",
+                    body: "test was successfull",
+                    attachLog: true
+                }
+                failure{
+                    mail to:"vishnuprasad9797@gmail.com",
+                    subject: "Test was failure email",
+                    body: "test failed",
+                    attachLog: true
+                }
+            }
 
         }
         stage('Code Analysis'){
             steps{
                 echo "Codes being analyzed by CheckStyle..."
             }
+            
 
         }
         stage('Security Scan'){
