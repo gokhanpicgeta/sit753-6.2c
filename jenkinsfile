@@ -18,7 +18,8 @@ pipeline{
                     emailext(
                         to: 'vishnuprasad9797@gmail.com',
                         subject: 'Stage Successful',
-                        body: 'The stage was successful.'
+                        body: 'The stage was successful.',
+                        attachLog: true
                     )
                 }
             }
