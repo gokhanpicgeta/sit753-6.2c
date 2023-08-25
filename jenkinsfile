@@ -14,14 +14,12 @@ pipeline{
             }   
         post {
             success {
-                script{
                     emailext(
                         to: 'vishnuprasad9797@gmail.com',
                         subject: 'Stage Successful',
                         body: 'The stage was successful.',
                        attachmentsPattern: '**/*.log'
                     )
-                }
             }
             failure {
                 script {
