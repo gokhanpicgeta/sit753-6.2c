@@ -1,50 +1,46 @@
 pipeline{
     agent any
-    environment{
-        DIRECTORY_PATH = '/users/vish/sit753/'
-        TESTING_ENVIRONMENT = '/users/vish/sit753/testing'
-        PRODUCTION_ENVIRONMENT = '/users/vish/sit753/production/vish'
-    }
     stages{
         stage('Build'){
             steps{
-                echo "fetch the source code from $DIRECTORY_PATH specified by the environment variable"
-                echo "compile the code and generate any necessary artifacts"
-                withMaven {
-                  sh "mvn clean verify"
-                } // withMaven will discover the generated Maven artifacts, JUnit Surefire & FailSafe reports and FindBugs reports
+                echo "Using Maven to auto build..."
             }
 
         }
         stage('Test'){
             steps{
-                echo "unit tests"
-                echo "integration tests"
-                echo "end to end tests"
+                echo "JUnit for unit tests..."
+                echo "JUnit for integration tests..."
             }
 
         }
-        stage('Code Quality Check'){
+        stage('Code Analysis'){
             steps{
-                echo "check the quality of code"
+                echo "Codes being analyzed by CheckStyle..."
             }
 
         }
-        stage('Deploy'){
+        stage('Security Scan'){
             steps{
-                echo "deploy the application to $TESTING_ENVIRONMENT specified by the environment variable"
+                echo "Security scan to identify vulnerabilities being done by Spectral..."
             }
 
         }
-        stage('Approval'){
+        stage('Deploy to Staging'){
             steps{
-                sleep 10
+                echo "Deploying to staging server (AWS EC2)"
+            }
+
+        }
+        stage('Integration tests on staging'){
+            steps{
+                echo "Running integration tests on staging environment"
             }
 
         }
         stage('Deploy to Production'){
             steps{
-                echo "Production environment is $PRODUCTION_ENVIRONMENT"
+                echo "Deploying application to production server (AWS EC2)"
             }
 
         }
