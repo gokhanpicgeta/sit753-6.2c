@@ -17,6 +17,7 @@ pipeline{
             steps{
                 echo "unit tests"
                 echo "integration tests"
+                echo "end to end tests"
             }
 
         }
