@@ -51,7 +51,8 @@ pipeline{
             success{
                 mail to: 'vishnuprasad9797@gmail.com',
                 subject: 'Security scan was successful',
-                body: 'Security scan was successful'
+                body: 'Security scan was successful',
+                attachLog:true
             }
         }
 
