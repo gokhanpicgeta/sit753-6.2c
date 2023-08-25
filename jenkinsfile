@@ -14,17 +14,13 @@ pipeline{
             }
             post{
                 success{
-                    mail to:"vishnuprasad9797@gmail.com",
-                    subject: "Test was sucessful email",
-                    body: "test was successfull",
-                    attachLog: true
-                }
-                failure{
-                    mail to:"vishnuprasad9797@gmail.com",
-                    subject: "Test was failure email",
-                    body: "test failed",
-                    attachLog: true
-                }
+                 emailext(
+                    to: 'vishnuprasad9797@gmail.com',
+                    subject: subject,
+                    body: body,
+                    attachmentsPattern: '**/*.log'  // Attach all log files as artifacts
+                )
+            }
             }
 
         }
