@@ -11,18 +11,28 @@ pipeline{
             steps{
                 echo "JUnit for unit tests..."
                 echo "JUnit for integration tests..."
+            }   
+        post {
+            success {
+                script {
+                    emailext(
+                        to: 'vishnuprasad9797@gmail.com',
+                        subject: 'Stage Successful',
+                        body: 'The stage was successful.',
+                        attachLog: true
+                    )
+                }
             }
-            post{
-                success{
-                 emailext(
-                    to: 'vishnuprasad9797@gmail.com',
-                    subject: subject,
-                    body: body,
-                    attachmentsPattern: '**/*.log'  // Attach all log files as artifacts
-                )
+            failure {
+                script {
+                    emailext(
+                        to: 'vishnuprasad9797@gmail.com',
+                        subject: 'Stage Failed',
+                        body: 'The stage failed.',
+                        attachLog: true
+                    )
+                }
             }
-            }
-
         }
         stage('Code Analysis'){
             steps{
