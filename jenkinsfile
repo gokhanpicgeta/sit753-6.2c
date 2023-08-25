@@ -47,6 +47,14 @@ pipeline{
                 echo "Security scan to identify vulnerabilities being done by Spectral..."
             }
 
+        post{
+            success{
+                mail to: 'vishnuprasad9797@gmail.com',
+                subject: 'Security scan was successful',
+                body: 'Security scan was successful'
+            }
+        }
+
         }
         stage('Deploy to Staging'){
             steps{
